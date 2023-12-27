@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342904789871",
+    "project_id": "uploadimages-d6b87",
+    "storage_bucket": "uploadimages-d6b87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342904789871:android:0220cadc9330af9190e69a",
+        "android_client_info": {
+          "package_name": "com.example.scopedstorage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1dK0zpK-1m2Be8ul8lGTFTGpLsT-0Owk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

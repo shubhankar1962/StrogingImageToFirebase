@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+   <EditText
+       android:id="@+id/writeTxt"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+      android:hint="Enter text to weite in file"
+      android:layout_margin="20dp"/>
+
+   <EditText
+       android:id="@+id/write_title"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+      android:layout_marginHorizontal="20dp"
+      android:hint="enter title"
+      />
+
+   <androidx.appcompat.widget.AppCompatButton
+       android:id="@+id/create_file"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="20dp"
+       android:text="save file"/>
+
+   <Button
+       android:id="@+id/getImg"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="open media"
+      android:layout_marginHorizontal="20dp"
+      android:textColor="@color/white"/>
+
+   <androidx.appcompat.widget.AppCompatButton
+       android:id="@+id/uploadImg"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="UploadImgTofirebase"
+       android:layout_marginHorizontal="20dp"/>
+
+   <ImageView
+       android:id="@+id/showImage"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:src="@drawable/ic_launcher_background"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
