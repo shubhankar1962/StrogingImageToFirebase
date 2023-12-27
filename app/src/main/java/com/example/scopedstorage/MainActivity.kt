@@ -11,9 +11,13 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.scopedstorage.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -41,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
     private val openGallery =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { result ->
@@ -75,14 +80,43 @@ class MainActivity : AppCompatActivity() {
 
         binding.uploadImg.setOnClickListener{
             uploadImgFirebase()
+            retriveImageFromFirebase()
         }
+    }
+
+    private fun retriveImageFromFirebase() {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("statusimage")
+        databaseReference.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children)
+                {
+                    val downloadlink = data.child("pics").getValue(String::class.java)
+
+                    downloadlink?.let {
+                        loadImageFromFirebase(it)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+    }
+
+    private fun loadImageFromFirebase(it: String) {
+        Glide.with(this)
+            .load(it)
+            .into(binding.showImage)
     }
 
 
     private fun init()
     {
         storageinstance = Firebase.storage.reference
-        firebaseFireStore = FirebaseFirestore.getInstance()
+      //  firebaseFireStore = FirebaseFirestore.getInstance()
+
     }
 
 
