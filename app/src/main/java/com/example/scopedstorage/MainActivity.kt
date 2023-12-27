@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.scopedstorage.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    
+
     private val openGallery =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { result ->
                if(result != null){
@@ -201,16 +202,25 @@ class MainActivity : AppCompatActivity() {
 
     // Function to save the download URL to Firestore
     private fun saveToFirestore(downloadUrl: String) {
+        val databaseref = FirebaseDatabase.getInstance().getReference("statusimage")
+        val imageKey = databaseref.push().key
+
+
         val map = HashMap<String, Any>()
         map["pics"] = downloadUrl
 
-        firebaseFireStore.collection("StatusImages").add(map).addOnCompleteListener { firestoreTask ->
-            if (firestoreTask.isSuccessful) {
-                Toast.makeText(this, "Successfully uploaded", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Upload failed", Toast.LENGTH_SHORT).show()
-            }
-        }
+      imageKey?.let {
+          databaseref.child(it).setValue(map).addOnCompleteListener{databaseTask->
+              if(databaseTask.isSuccessful)
+              {
+                  Toast.makeText(this, "link saved successfully",Toast.LENGTH_SHORT).show()
+              }else
+              {
+                  Toast.makeText(this, "error in saved link", Toast.LENGTH_SHORT).show()
+              }
+
+          }
+      }
     }
 
 

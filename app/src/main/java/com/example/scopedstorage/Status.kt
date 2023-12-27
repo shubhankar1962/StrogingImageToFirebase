@@ -21,5 +21,11 @@ class Status : AppCompatActivity() {
             binding.statuscreen.setImageURI(mediaUri)
 
         }
+
+        retriveImageDataFromFireBase()
+    }
+
+    private fun retriveImageDataFromFireBase() {
+
     }
 }
